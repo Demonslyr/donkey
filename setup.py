@@ -48,6 +48,7 @@ setup(name='donkeycar',
     extras_require={
                     'pi': [
                         'picamera',
+                        'Adafruit_GPIO.I2C',
                         'Adafruit_PCA9685',
                         ]
                     },

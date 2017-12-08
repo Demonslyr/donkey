@@ -20,7 +20,7 @@ import donkeycar as dk
 from donkeycar.parts.camera import PiCamera
 from donkeycar.parts.transform import Lambda
 from donkeycar.parts.keras import KerasCategorical
-from donkeycar.parts.actuator import PCA9685, PWMSteering, PWMThrottle
+from donkeycar.parts.actuator import JankyJoystick, PWMSteering, PWMThrottle
 from donkeycar.parts.datastore import TubHandler, TubGroup
 from donkeycar.parts.controller import LocalWebController, JoystickController
 
@@ -100,12 +100,12 @@ def drive(cfg, model_path=None, use_joystick=False):
           outputs=['angle', 'throttle'])
     
     
-    steering_controller = PCA9685(cfg.STEERING_CHANNEL)
+    steering_controller = JankyJoystick(cfg.STEERING_CHANNEL)
     steering = PWMSteering(controller=steering_controller,
                                     left_pulse=cfg.STEERING_LEFT_PWM, 
                                     right_pulse=cfg.STEERING_RIGHT_PWM)
     
-    throttle_controller = PCA9685(cfg.THROTTLE_CHANNEL)
+    throttle_controller = JankyJoystick(cfg.THROTTLE_CHANNEL)
     throttle = PWMThrottle(controller=throttle_controller,
                                     max_pulse=cfg.THROTTLE_FORWARD_PWM,
                                     zero_pulse=cfg.THROTTLE_STOPPED_PWM, 
