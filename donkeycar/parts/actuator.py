@@ -19,7 +19,7 @@ class JankyJoystick:
     def __init__(self, channel, frequency=60):
         import Adafruit_GPIO.I2C as I2C
         i2c = I2C
-        self._device = i2c.get_i2c_device(0x40, **kwargs)
+        self._device = i2c.get_i2c_device(0x40)
         self._device.writeRaw8('s')
         # self._device.writeRaw8('t')
         # self._device.writeRaw8('a')
