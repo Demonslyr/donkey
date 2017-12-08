@@ -8,6 +8,29 @@ import time
 
 import donkeycar as dk
 
+class JankyJoystick:
+    '''
+    Arduino Leo being used as driving controls for a racing game.
+    This translator will attempt to be treated like a PCA9685
+    motor controller but output data ythan can be comprehended
+    by the leo...ideally not pwm pulses made string...
+    '''
+    #need the python ic2 transport lib here
+    def __init__(self, channel, frequency=60):
+        import Adafruit_GPIO.I2C as I2C
+        self._device = i2c.get_i2c_device(0x40, **kwargs)
+        self._device.writeRaw8('s')
+        # self._device.writeRaw8('t')
+        # self._device.writeRaw8('a')
+        # self._device.writeRaw8('r')
+        # self._device.writeRaw8('t')
+        # Initialise the PCA9685 using the default address (0x40).
+
+    def set_pulse(self, pulse):
+        self.pwm.set_pwm(self.channel, 0, pulse) 
+
+    def run(self, pulse):
+        self.set_pulse(pulse)
         
 class PCA9685:
     ''' 
@@ -29,7 +52,7 @@ class PCA9685:
         
 class PWMSteering:
     """
-    Wrapper over a PWM motor cotnroller to convert angles to PWM pulses.
+    Wrapper over a PWM motor controller to convert angles to PWM pulses.
     """
     LEFT_ANGLE = -1 
     RIGHT_ANGLE = 1
